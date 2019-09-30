@@ -19,4 +19,8 @@ public class UserService {
 	public UserVo getUser(UserVo vo) {
 		return userDao.get(vo);
 	}
+
+	public Boolean existUser(String email) {
+		return userDao.get(email) != null;
+	}
 }

@@ -32,7 +32,12 @@ public class UserDao {
 		UserVo result = sqlSession.selectOne("user.getByEmailAndPassword1", vo);
 		return result; 
 	}
-	
+
+	public UserVo get(String email) {
+		UserVo result = sqlSession.selectOne("user.getByEmail", email);
+		return result;		
+	}
+
 	public UserVo get(String email, String password) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("email", email);
@@ -46,4 +51,5 @@ public class UserDao {
 		int count = sqlSession.update("user.update", vo);
 		return count == 1;
 	}
+
 }

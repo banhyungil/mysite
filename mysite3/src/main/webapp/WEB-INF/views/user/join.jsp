@@ -8,6 +8,18 @@
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link href="${pageContext.servletContext.contextPath }/assets/css/user.css" rel="stylesheet" type="text/css">
+<script src="${pageContext.servletContext.contextPath }/assets/js/jquery/jquery-1.9.0.js" type="text/javascript"></script>
+<script>
+$(function(){
+	var $btnCheckEmail = $("#btn-check-email");
+	$btnCheckEmail.click(function(){
+		console.log("!!!!!!!!");
+	});
+});
+
+
+
+</script>
 </head>
 <body>
 	<div id="container">
@@ -22,7 +34,7 @@
 
 					<label class="block-label" for="email">이메일</label>
 					<input id="email" name="email" type="text" value="">
-					<input type="button" value="id 중복체크">
+					<input id="btn-check-email" type="button" value="이메일 확인">
 					
 					<label class="block-label">패스워드</label>
 					<input name="password" type="password" value="">
