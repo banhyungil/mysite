@@ -11,9 +11,40 @@
 <script src="${pageContext.servletContext.contextPath }/assets/js/jquery/jquery-1.9.0.js" type="text/javascript"></script>
 <script>
 $(function(){
-	var $btnCheckEmail = $("#btn-check-email");
-	$btnCheckEmail.click(function(){
-		console.log("!!!!!!!!");
+	$("#input-email").change(function(){
+		$("#btn-check-email").show();
+		$("#img-checked").hide();
+	});	
+	
+	$("#btn-check-email").click(function(){
+		var email = $("#input-email").val();
+		if(email == ""){
+			return;
+		}
+	
+		// ajax 통신
+		$.ajax({
+			url: "${pageContext.servletContext.contextPath }/api/user/checkemail?email=" + email,
+			type: "get",
+			dataType: "json",
+			data: "",
+			success: function(response){
+				if(response.result == "fail"){
+					console.error(response.message);
+					return;
+				}
+				
+				if(response.data == true){
+					alert("이미 존재하는 메일입니다.");
+					$("#input-email").val("");
+					$("#input-email").focus();
+					return;
+				}
+				
+				$("#btn-check-email").hide();
+				$("#img-checked").show();
+			}
+		});
 	});
 });
 
@@ -26,15 +57,15 @@ $(function(){
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="user">
-
 				
 				<form id="join-form" name="joinForm" method="post" action="${pageContext.servletContext.contextPath }/user/join">
 					<label class="block-label" for="name">이름</label>
 					<input id="name" name="name" type="text" value="${userVo.name }">
 
 					<label class="block-label" for="email">이메일</label>
-					<input id="email" name="email" type="text" value="">
-					<input id="btn-check-email" type="button" value="이메일 확인">
+					<input id="input-email" name="email" type="text" value="">
+					<input id="btn-check-email" type="button" value="중복확인">
+					<img id="img-checked" style='width:20px; display:none' src='${pageContext.servletContext.contextPath }/assets/images/check.png'/>
 					
 					<label class="block-label">패스워드</label>
 					<input name="password" type="password" value="">
