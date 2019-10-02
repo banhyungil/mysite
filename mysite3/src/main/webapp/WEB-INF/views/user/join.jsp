@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -63,12 +64,25 @@ $(function(){
 				
 				<form id="join-form" name="joinForm" method="post" action="${pageContext.servletContext.contextPath }/user/join">
 					<label class="block-label" for="name">이름</label>
-					<input id="name" name="name" type="text" value="${userVo.name }">
+					<input id="name" name="name" type="text" value="">
+					<spring:hasBindErrors name="userVo">
+						<c:if test='${errors.hasFieldErrors("name") }'>
+							<br>
+							<strong>${errors.getFieldError("name").defaultMessage }</strong>
+						</c:if>
+					</spring:hasBindErrors>
+					
+
 
 					<label class="block-label" for="email">이메일</label>
 					<input id="input-email" name="email" type="text" value="">
 					<input id="btn-check-email" type="button" value="중복확인">
 					<img id="img-checked" style='width:20px; display:none' src='${pageContext.servletContext.contextPath }/assets/images/check.png'/>
+					<spring:hasBindErrors name="userVo">
+						<c:if test='${errors.hasFieldErrors("email") }'>
+							<spring:message code='${errors.getFieldErrors("email")[0] }' text='${errors.getFieldError("email").defaultMessage }'/>
+						</c:if>
+					</spring:hasBindErrors>
 					
 					<label class="block-label">패스워드</label>
 					<input name="password" type="password" value="">
