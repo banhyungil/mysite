@@ -50,22 +50,4 @@ public class UserController {
 	public String login() {
 		return "user/login";
 	}
-
-	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public String logout(HttpSession session) {
-		//접근 제어(ACL)
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser != null) {
-			session.removeAttribute("authUser");
-			session.invalidate();
-		}
-
-		return "redirect:/";
-	}
-	
-//	@ExceptionHandler(UserDaoException.class)
-//	public String handlerException() {
-//		return "error/exception";
-//	}
-	
 }

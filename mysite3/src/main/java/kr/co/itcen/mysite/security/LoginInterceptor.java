@@ -4,15 +4,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import kr.co.itcen.mysite.service.UserService;
 import kr.co.itcen.mysite.vo.UserVo;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
-
+	
+	@Autowired
+	private UserService userService;
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -25,8 +27,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		// 어플리케이션 어디서든지 Spring Container(ApplicationContext)를
 		// 가져오는 방법
-		ApplicationContext appCtxt = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
-		UserService userService = appCtxt.getBean(UserService.class);
+		// ApplicationContext appCtxt = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+		// UserService userService = appCtxt.getBean(UserService.class);
 		
 		UserVo authUser = userService.getUser(vo);
 		if(authUser == null) {
