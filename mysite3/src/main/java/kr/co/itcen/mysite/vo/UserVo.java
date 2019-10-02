@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class UserVo {
 	private Long no;
-	
+
 	@NotEmpty
 	@Length(min=2, max=8)
 	private String name;
@@ -15,10 +15,10 @@ public class UserVo {
 	@Email
 	private String email;
 	
-	
 	private String password;
 	private String gender;
 	private String joinDate;
+
 	public Long getNo() {
 		return no;
 	}
@@ -52,9 +52,15 @@ public class UserVo {
 	public String getJoinDate() {
 		return joinDate;
 	}
+
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
+	
+	public String[] getGenders() {
+		return new String[]{"male", "female"};
+	}
+	
 	@Override
 	public String toString() {
 		return "UserVo [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", gender="
