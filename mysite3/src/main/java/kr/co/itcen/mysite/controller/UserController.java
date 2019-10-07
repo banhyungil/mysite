@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.co.itcen.mysite.security.Auth;
 import kr.co.itcen.mysite.security.AuthUser;
 import kr.co.itcen.mysite.service.UserService;
-import kr.co.itcen.mysite.vo.GuestbookVo;
 import kr.co.itcen.mysite.vo.UserVo;
 
 @Controller
@@ -55,13 +54,8 @@ public class UserController {
 
 	@Auth("USER")
 	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public String update(@AuthUser UserVo authUser, Model model) {
-		Long no = authUser.getNo();
-		
-		System.out.println(authUser);
-		
-		UserVo userVo = userService.getUser(no);
-		model.addAttribute("userVo", userVo);
+	public String update(@ModelAttribute @AuthUser UserVo authUser) {
+		authUser = userService.getUser(authUser.getNo());
 		return "user/update";
 	}
 
