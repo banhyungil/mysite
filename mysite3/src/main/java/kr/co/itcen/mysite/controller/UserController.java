@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.itcen.mysite.security.Auth;
 import kr.co.itcen.mysite.service.UserService;
 import kr.co.itcen.mysite.vo.UserVo;
 
@@ -50,4 +51,24 @@ public class UserController {
 	public String login() {
 		return "user/login";
 	}
+
+	@Auth("USER")
+	@RequestMapping(value="/update", method=RequestMethod.GET)
+	public String update(@AuthUser UserVo authUser, Model model) {
+
+		//UserVo authUser = (UserVo)session.getAttribute("authUser");
+		Long no = authUser.getNo();
+		UserVo userVo = userService.getUser(no);
+
+		model.addAttribute("userVo", userVo);
+		return "user/update";
+	}
+
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String update(
+		@ModelAttribute @Valid UserVo vo,
+		BindingResult result) {
+		return "user/update";
+	}
+	
 }
