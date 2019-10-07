@@ -1,6 +1,5 @@
 package kr.co.itcen.mysite.controller;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.itcen.mysite.security.Auth;
+import kr.co.itcen.mysite.security.AuthUser;
 import kr.co.itcen.mysite.service.UserService;
+import kr.co.itcen.mysite.vo.GuestbookVo;
 import kr.co.itcen.mysite.vo.UserVo;
 
 @Controller
@@ -55,11 +56,11 @@ public class UserController {
 	@Auth("USER")
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String update(@AuthUser UserVo authUser, Model model) {
-
-		//UserVo authUser = (UserVo)session.getAttribute("authUser");
 		Long no = authUser.getNo();
+		
+		System.out.println(authUser);
+		
 		UserVo userVo = userService.getUser(no);
-
 		model.addAttribute("userVo", userVo);
 		return "user/update";
 	}
