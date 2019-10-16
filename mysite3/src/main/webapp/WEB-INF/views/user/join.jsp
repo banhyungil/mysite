@@ -19,7 +19,7 @@ $(function(){
 	});	
 	
 	$("#btn-check-email").click(function(){
-		var email = $("#input-email").val();
+		var email = $("#email").val();
 		if(email == ""){
 			return;
 		}
