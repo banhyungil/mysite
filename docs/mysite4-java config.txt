@@ -21,6 +21,8 @@
  kr.co.itcen.config.app
  kr.co.itcen.mysite.app.mybatis
 
+ MVCConfig <---- WebMvcConfigureAdapter
+
  mysite4(Project Root)
     |
     |-- /WEB-INF
