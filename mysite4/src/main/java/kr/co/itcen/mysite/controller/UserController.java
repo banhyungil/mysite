@@ -55,9 +55,10 @@ public class UserController {
 	@Auth("USER")
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String update(
-		@AuthUser UserVo authUser, Model model) {
-		authUser = userService.getUser(authUser.getNo());
+		@AuthUser UserVo authUser, 
+		Model model) {
 		System.out.println(authUser);
+		authUser = userService.getUser(authUser.getNo());
 		model.addAttribute("userVo", authUser);
 		return "user/update";
 	}
@@ -67,6 +68,14 @@ public class UserController {
 		@ModelAttribute @Valid UserVo vo,
 		BindingResult result) {
 		return "user/update";
+	}
+	
+	@RequestMapping(value="/auth", method=RequestMethod.POST)
+	public void auth() {
+	}
+
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public void logout() {
 	}
 	
 }
