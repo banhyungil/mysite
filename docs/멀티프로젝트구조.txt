@@ -6,6 +6,9 @@
    |-- Web  Application Context 
       (WebConfig.java <- AnnotationConfigWebApplicationContext)
 
+hellospring3 --> AbstarctAnnotationConfigDispatcherServletInitializer
+    
+ 
 
 
  mysite config
@@ -18,8 +21,8 @@
  mysite
    |----- mysite2 (Servlet/JSP, Model2, MVC)
    |----- mysite3 (Spring MVC, XML Config)
-   |----- mysite4 (Spring MVC, Java Config1)
-   |----- mysite5 (Spring MVC, Java Config2)
+   |----- mysite4 (Spring MVC, Java Config1), web.xml
+   |----- mysite5 (Spring MVC, Java Config2), ServletContainerInitializer
    |----- mysite6 (Spring Boot,Java Config, yaml properties)
 
 
