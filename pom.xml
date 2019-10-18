@@ -53,7 +53,7 @@
 				</excludes>
 			</resource>
 		</resources>
-		
+
 		<plugins>
 
 			<plugin>
@@ -93,6 +93,7 @@
 		<module>mysite3</module>
 		<module>mysite4</module>
 		<module>mysite5</module>
+		<module>mysite6</module>
 	</modules>
 </project>
 
